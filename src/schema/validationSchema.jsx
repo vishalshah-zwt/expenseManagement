@@ -10,7 +10,7 @@ import * as Yup from 'yup';
          spendType:Yup.string().required('spendType Required'),
          date:Yup.string().required('date Required'),
          amount:Yup.string().matches(/^0*[1-9]\d*$/,"Enter Positive Value").test(
-            'Is-welcome', //The name of the test
+            'Budget', //The name of the test
             "Budget exceeded..!", // The error message to show
             (value,ctx) => {
                let budget = Number(ctx?.from?.[1]?.value?.expenseItems?.reduce((acc, curr) => Number(acc) + Number(curr?.amount), 0))
