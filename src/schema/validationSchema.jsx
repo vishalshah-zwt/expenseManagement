@@ -9,13 +9,8 @@ import * as Yup from 'yup';
       Yup.object().shape({
          spendType:Yup.string().required('spendType Required'),
          date:Yup.string().required('date Required'),
-         amount:Yup.string().matches(/^0*[1-9]\d*$/,"Enter Positive Value").test(
-            'Budget', //The name of the test
-            "Budget exceeded..!", // The error message to show
-            (value,ctx) => {
+         amount:Yup.string().matches(/^0*[1-9]\d*$/,"Enter Positive Value").test('Budget', "Budget exceeded..!", (value,ctx) => {
                let budget = Number(ctx?.from?.[1]?.value?.expenseItems?.reduce((acc, curr) => Number(acc) + Number(curr?.amount), 0))
-               console.log(ctx?.from?.[1]?.value?.expenseItems?.reduce((acc, curr) => Number(acc) + Number(curr?.amount), 0),"b")
-               console.log(Number(ctx?.from?.[1]?.value?.budget),"a")
                if(Number(ctx?.from?.[1]?.value?.budget) >= budget )
                   {
                      return true
@@ -23,7 +18,7 @@ import * as Yup from 'yup';
                else{
                   return false
                }
-            }, // The test logic
+            }, 
           ).required('amount Required'),
       })
     )
